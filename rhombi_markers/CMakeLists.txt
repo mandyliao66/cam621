@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package( Eigen3 REQUIRED )
 MESSAGE(STATUS "Eigen3 found, version: ${EIGEN3_VERSION} in dir ${EIGEN3_INCLUDE_DIR}")
 
-
+find_package(OpenCV REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   roslaunch
@@ -23,6 +23,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf_conversions
   eigen_conversions
   tf
+  
 )
 
 include_directories(
@@ -31,6 +32,7 @@ include_directories(
     ${OpenCV_INCLUDE_DIRS} 
     ${aruco_INCLUDE_DIRS} 
     ${EIGEN3_INCLUDE_DIR}
+    /opt/ros/melodic/include/aruco
 )
 
 #SET(aruco_LIB_DIR "/home/odroid/github_packages/aruco-3.1.12/src"; ${aruco_LIB_DIR} )
@@ -48,6 +50,7 @@ catkin_package(
     tf_conversions
     eigen_conversions
     tf
+    
 )
 
 #SET(OpenCV_DIR ~/github_packages/opencv_3_4_4/opencv/build/)
@@ -62,7 +65,7 @@ MESSAGE(STATUS "aruco !!!!!!!!!!!!!!!!! found, version: ${aruco_VERSION} in dir 
 #MESSAGE("1")
 #MESSAGE(STATUS ${OpenCV_LIB_DIRS} )
 #MESSAGE("2")
-
+include_directories(/usr/local/include)
 #add_executable(aruco_simple src/aruco_simple.cpp)
 #target_link_libraries(aruco_simple ${aruco_LIBS} ${OpenCV_LIBS} ${catkin_LIBRARIES})
 
@@ -78,11 +81,14 @@ target_link_libraries(rhombi_markers ${aruco_LIBS} ${OpenCV_LIBS} ${catkin_LIBRA
 add_executable(rhombi_markers_v2 src/rhombi_markers_v2.cpp)
 target_link_libraries(rhombi_markers_v2 ${aruco_LIBS} ${OpenCV_LIBS} ${catkin_LIBRARIES})
 
-add_executable(rhombi_detect src/rhombi_detect.cpp)
-target_link_libraries(rhombi_detect ${aruco_LIBS} ${OpenCV_LIBS} ${catkin_LIBRARIES})
+add_executable(aruco_detection src/aruco_detection.cpp)
+target_link_libraries(aruco_detection ${aruco_LIBS} ${OpenCV_LIBS} ${catkin_LIBRARIES})
 
 add_executable(NYUNY_experiment src/NYUNY_experiment.cpp)
 target_link_libraries(NYUNY_experiment ${aruco_LIBS} ${OpenCV_LIBS} ${catkin_LIBRARIES})
 
 add_executable(rhombi_geom_extractor src/rhombi_geom_extractor.cpp)
 target_link_libraries(rhombi_geom_extractor ${aruco_LIBS} ${OpenCV_LIBS} ${catkin_LIBRARIES} -lstdc++fs)
+
+add_executable(aruco_simple src/aruco_simple.cpp)
+target_link_libraries(aruco_simple ${aruco_LIBS} ${OpenCV_LIBS} ${catkin_LIBRARIES})
