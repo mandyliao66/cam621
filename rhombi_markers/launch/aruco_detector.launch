@@ -1,0 +1,11 @@
+<launch>
+  <!-- ArUco parameters -->
+  <arg name="DICTIONARY" default="1" doc="ArUco dictionary to use: 0=ARUCO, 1=ARUCO_MIP_36h12, 2=ARUCO_MIP_25h7, 3=ARUCO_MIP_16h3" />
+
+  <node pkg="rhombi_markers" type="aruco_detection" name="aruco_detection" output="screen">
+    <!-- Load camera calibration parameters -->
+    <rosparam command="load" file="/home/surgrob/projects/cam/src/spinnaker_sdk_camera_driver/params/test_params.yaml" />
+
+    <param name="DICTIONARY" value="$(arg DICTIONARY)" />
+  </node>
+</launch>

@@ -8,14 +8,19 @@ delay: 1.0
 
 # Assign all the follwing via launch file to prevent confusion and conflict
 
-#save_path: ~/projects/data
-#save_type: .bmp #binary or .tiff or .bmp
-#binning: 1 # going from 2 to 1 requires cameras to be unplugged and replugged
-#color: false
-#frames: 50
-#soft_framerate: 20 # this frame rate reflects to the software frame rate set using ros::rate
+output: screen
+save_path: ~
+exposure_time: 0
+save_type: .bmp #binary or .tiff or .bmp
+binning: 2 # going from 2 to 1 requires cameras to be unplugged and replugged
+color: true
+frames: 3400
+save: false
+soft_framerate: 20 # this frame rate reflects to the software frame rate set using ros::rate
 #exp: 997
-#to_ros: true  #When to_ros is not selected, but live is selected, pressing 'space' exports single image to ROS
+time: false
+
+to_ros: true  #When to_ros is not selected, but live is selected, pressing 'space' exports single image to ROS
 
 #Camera info message details
 distortion_model: plumb_bob

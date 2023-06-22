@@ -5,11 +5,11 @@
   <!-- acquisition.launch -->
 
   <arg name="binning"		    default="2"	doc="Binning for cameras, when changing from 2 to 1 cameras need to be unplugged and replugged"/>
-  <arg name="color"		        default="false"	doc="Should color images be used (only works on models that support color images)"/>
+  <arg name="color"		        default="true"	doc="Should color images be used (only works on models that support color images)"/>
   <arg name="exposure_time"     default="0" doc="Exposure_time setting for cameras"/>
   <arg name="external_trigger"  default="false"	doc="External trigger (No camera is master)"/>
   <arg name="target_grey_value"   default="0"   doc="AutoExposureTargetGreyValue min: 4 max: 99 if set below 4, AutoExposureTargetGreyValueAuto will be set to continuous(auto) also available as dynamic reconfigurable parameter" />
-  <arg name="frames"            default="0"	doc="Numer of frames to save/view 0=ON"/>
+  <arg name="frames"            default="3400"	doc="Numer of frames to save/view 0=ON"/>
   <arg name="live"              default="false"	doc="Show images on screen GUI"/>
   <arg name="live_grid"         default="false"	doc="Show images on screen GUI in a grid"/>
   <arg name="output"            default="screen"	doc="display output to screen or log file"/>

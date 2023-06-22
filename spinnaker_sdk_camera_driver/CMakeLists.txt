@@ -149,8 +149,9 @@ if(${CMAKE_SYSTEM_PROCESSOR} MATCHES aarch64 OR arm)
       SYSTEM ${Spinnaker_INCLUDE_DIRS}
       SYSTEM ${OpenCV_INCLUDE_DIRS}
       SYSTEM ${Boost_INCLUDE_DIR}
-    )
 
+    )
+    include_directories(/usr/local/include)
     link_directories( ${Spinnaker_LIBRARIES} )
 
     set (LIBS ${Spinnaker_LIBRARIES} ${OpenCV_LIBS} ${Boost_GENERAL} ${aruco_LIBS})
@@ -170,18 +171,6 @@ target_link_libraries(acquilib ${LIBS} ${catkin_LIBRARIES})
 add_executable (acquisition_node src/acquisition_node.cpp)
 add_dependencies(acquisition_node acquilib ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 target_link_libraries (acquisition_node acquilib ${LIBS} ${catkin_LIBRARIES})
-
-add_executable (NE_acquisition_node src/NE_acquisition_node.cpp src/NE_utilities.cpp)
-add_dependencies(NE_acquisition_node ${catkin_EXPORTED_TARGETS})
-target_link_libraries (NE_acquisition_node ${LIBS} ${catkin_LIBRARIES})
-
-add_executable (NE_acquisition_node_annotations src/NE_acquisition_node_annotations.cpp src/NE_utilities.cpp)
-add_dependencies(NE_acquisition_node_annotations ${catkin_EXPORTED_TARGETS})
-target_link_libraries (NE_acquisition_node_annotations ${LIBS} ${catkin_LIBRARIES})
-
-add_executable (NYUNY_v1 src/NYUNY_v1.cpp src/NE_utilities.cpp)
-add_dependencies(NYUNY_v1 acquilib ${catkin_EXPORTED_TARGETS})
-target_link_libraries (NYUNY_v1 acquilib ${LIBS} ${catkin_LIBRARIES})
 
 ## subscriber_example for subscribing as nodelet
 add_library (subscriber_example examples/subscriber_nodelet.cpp)
