@@ -149,8 +149,9 @@ if(${CMAKE_SYSTEM_PROCESSOR} MATCHES aarch64 OR arm)
       SYSTEM ${Spinnaker_INCLUDE_DIRS}
       SYSTEM ${OpenCV_INCLUDE_DIRS}
       SYSTEM ${Boost_INCLUDE_DIR}
-    )
 
+    )
+    include_directories(/usr/local/include)
     link_directories( ${Spinnaker_LIBRARIES} )
 
     set (LIBS ${Spinnaker_LIBRARIES} ${OpenCV_LIBS} ${Boost_GENERAL} ${aruco_LIBS})
