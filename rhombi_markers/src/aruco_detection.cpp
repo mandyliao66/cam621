@@ -3,6 +3,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/highgui.hpp>
 #include <opencv2/core.hpp>
+#include <opencv2/calib3d.hpp>
 #include <image_transport/image_transport.h>
 #include <geometry_msgs/PoseArray.h>
 #include "aruco.h"
@@ -37,8 +38,12 @@ Mdetector.detect(image, markers, CamParam, 0.03, false);
 
 // Visualize the detected ArUco markers
 cv::Mat markerImage = image.clone();
+uint8_t i=0;
 for (const aruco::Marker& marker : markers) {
+  std::cout << "Marker " << ++i << ":" << marker.Rvec << " " << marker.Tvec << std::endl;
+  // Calculate pose for each marker
   marker.draw(markerImage, cv::Scalar(0, 0, 255), 2);
+  //marker.d
 }
 
 // Display the image with ArUco marker overlay
@@ -55,23 +60,12 @@ int main(int argc, char** argv) {
   ros::Rate loop_rate(RATE);
 
   // Load camera parameters if available
-  /*
-    string camera_params_file = "/home/surgrob/projects/cam/src/spinnaker_sdk_camera_driver/params/gapter1.yaml";
-    cv::FileStorage fs(camera_params_file, cv::FileStorage::READ);
-    if (!fs.isOpened()) {
-        ROS_ERROR("Failed to open camera parameters file: %s", camera_params_file.c_str());
-        return -1;
-    }
 
-    cv::Mat cameraMatrix, distCoeffs;
-    fs["intrinsic_coeffs"] >> cameraMatrix;
-    fs["distortion_coeffs"] >> distCoeffs;
-
-    fs.release();  // Close the file
+    cv::Mat cameraMatrix = (Mat1d(3, 3) << 2.1742285497994644e+03 ,0.0, 1.0585124352335515e+03, 0.0, 2.1834371437552527e+03, 8.3380515034517452e+02, 0.0, 0.0, 1.0);
+    cv::Mat distCoeffs = (Mat1d(1, 5) << -2.3646638455924696e-01, 1.8538700606070738e-01, -1.4635424579430090e-03, 3.6616013209817078e-03, -8.9736280250555356e-02);
 
   CamParam.CameraMatrix = cameraMatrix;
   CamParam.Distorsion = distCoeffs;
-  */
 
   // Configure marker detection parameters
   aruco::MarkerDetector::Params detector_params;
